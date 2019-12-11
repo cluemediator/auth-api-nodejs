@@ -27,7 +27,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 
 //middleware that checks if JWT token exists and verifies it if it does exist.
-//In all the future routes, this helps to know if the request is authenticated or not.
+//In all future routes, this helps to know if the request is authenticated or not.
 app.use(function (req, res, next) {
   // check header or url parameters or post parameters for token
   var token = req.headers['authorization'];
@@ -47,11 +47,13 @@ app.use(function (req, res, next) {
   });
 });
 
+
 // request handlers
 app.get('/', (req, res) => {
   if (!req.user) return res.status(401).json({ success: false, message: 'Invalid user to access it.' });
   res.send('Welcome to the Node.js Tutorial! - ' + req.user.name);
 });
+
 
 // validate the user credentials
 app.post('/users/signin', function (req, res) {
@@ -100,7 +102,7 @@ app.get('/verifyToken', function (req, res) {
       message: "Invalid token."
     });
 
-    // return 401 status if the userId is not match.
+    // return 401 status if the userId does not match.
     if (user.userId !== userData.userId) {
       return res.status(401).json({
         error: true,
