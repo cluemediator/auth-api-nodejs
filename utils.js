@@ -14,7 +14,7 @@ function generateToken(user) {
     isAdmin: user.isAdmin
   };
 
-  return token = jwt.sign(u, process.env.JWT_SECRET, {
+  return jwt.sign(u, process.env.JWT_SECRET, {
     expiresIn: 60 * 60 * 24 // expires in 24 hours
   });
 }
